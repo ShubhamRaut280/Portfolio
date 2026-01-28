@@ -1,16 +1,18 @@
+// hooks/useMousePosition.ts
 import { useState, useEffect } from 'react';
+import { type MousePosition } from '../types';
 
-export const useMousePosition = () => {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+export const useMousePosition = (): MousePosition => {
+  const [position, setPosition] = useState<MousePosition>({ x: 0, y: 0 });
 
-    useEffect(() => {
-        const handleMouseMove = (e : any) => {
-            setPosition({ x: e.clientX, y: e.clientY });
-        };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    return position;
+  return position;
 };
