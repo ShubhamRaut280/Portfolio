@@ -1,0 +1,132 @@
+// components/Projects.tsx
+import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { Github, Server,  MessageSquare, Zap, Users } from 'lucide-react';
+import type { Project, ProjectLink } from '../types';
+
+interface ProjectCardProps extends Project {}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ 
+  title, 
+  description, 
+  points, 
+  tech, 
+  links, 
+  icon: Icon, 
+  gradient, 
+  tags 
+}) => {
+  const [ref, isVisible] = useScrollReveal();
+
+  return (
+    <div 
+      ref={ref}
+      className={`backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl overflow-hidden group hover:border-cyan-400/30 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+    >
+      <div className={`h-48 relative overflow-hidden ${gradient}`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Icon className="w-16 h-16 text-white/20 group-hover:scale-110 transition-transform duration-500" />
+        </div>
+        <div className="absolute top-4 right-4 flex gap-2">
+          {tags.map((tag: string, idx: number) => (
+            <span key={idx} className="px-3 py-1 rounded-full text-xs backdrop-blur-md bg-black/20 border border-white/10">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="p-6">
+        <h4 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">{title}</h4>
+        <p className="text-gray-400 text-sm mb-4">{description}</p>
+        <ul className="text-xs text-gray-500 space-y-1 mb-4">
+          {points.map((point: string, idx: number) => (
+            <li key={idx}>• {point}</li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tech.map((t: string, idx: number) => (
+            <span key={idx} className="text-xs text-gray-400">{t}</span>
+          ))}
+        </div>
+        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <div className="flex gap-3">
+            {links.map((link: ProjectLink, idx: number) => (
+              <a 
+                key={idx}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-white transition-colors"
+                title={link.label}
+              >
+                <link.icon className="w-5 h-5" />
+              </a>
+            ))}
+          </div>
+          <span className="text-xs text-gray-600">{links[0]?.type || 'Project'}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Projects: React.FC = () => {
+  const projects: Project[] = [
+    {
+      title: "LiveThread",
+      description: "Chrome extension that converts any webpage into a live discussion forum using WebSockets.",
+      points: ["Socket.io & Redis Pub/Sub", "Dynamic URL-based rooms", "Real-time user presence"],
+      tech: ["React", "TypeScript", "Node.js", "MongoDB"],
+      icon: MessageSquare,
+      gradient: "bg-gradient-to-br from-purple-900/50 to-blue-900/50",
+      tags: ["Web", "Real-time"],
+      links: [
+        { url: "https://github.com/ShubhamRaut280/liveThread", icon: Github, label: "Frontend", type: "Chrome Extension" },
+        { url: "https://github.com/shubham9689/livethread-backend", icon: Server, label: "Backend", type: "Backend" }
+      ]
+    },
+    {
+      title: "ElectroRoute",
+      description: "EV Charging Station Management system with geo-based search and JWT authentication.",
+      points: ["Spring Boot REST APIs", "Geo-location search", "Docker containerization"],
+      tech: ["Java", "Spring Boot", "MySQL", "Docker"],
+      icon: Zap,
+      gradient: "bg-gradient-to-br from-green-900/50 to-teal-900/50",
+      tags: ["Backend", "Java"],
+      links: [
+        { url: "https://github.com/ShubhamRaut280/electro-route", icon: Github, label: "Source", type: "EV Tech" }
+      ]
+    },
+    {
+      title: "SkillSphere",
+      description: "Freelancing platform connecting clients with service providers. Real-time notifications and review systems.",
+      points: ["Firebase backend", "Freelancer discovery", "Job request management"],
+      tech: ["React", "Node.js", "Firebase"],
+      icon: Users,
+      gradient: "bg-gradient-to-br from-orange-900/50 to-red-900/50",
+      tags: ["Full Stack", "Firebase"],
+      links: [
+        { url: "https://github.com/ShubhamRaut280/skillsphere", icon: Github, label: "Source", type: "Marketplace" }
+      ]
+    }
+  ];
+
+  return (
+    <section id="projects" className="py-32 relative bg-[#111111]">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">Portfolio</h2>
+          <h3 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk']">Featured Projects</h3>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map((project: Project, idx: number) => (
+            <ProjectCard key={idx} {...project} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;
