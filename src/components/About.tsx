@@ -40,7 +40,7 @@ const About: React.FC = () => {
   const [ref1, isVisible1] = useScrollReveal();
   const [ref2, isVisible2] = useScrollReveal();
 
-  
+
 
   return (
     <section id="about" className="py-32 relative">
@@ -111,10 +111,22 @@ const About: React.FC = () => {
                 Certifications
               </h4>
               <div className="flex flex-wrap gap-2">
-                {['Accenture Nordics Developer', 'Postman API Expert', 'Java', 'MySQL'].map((cert: string) => (
-                  <span key={cert} className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10">
-                    {cert}
-                  </span>
+                {[
+                  { name: 'Accenture Nordics Developer', link: 'https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing' },
+                  { name: 'Postman API Expert', link: 'https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA' },
+                  { name: 'Java', link: 'https://drive.google.com/file/d/1LMBDrknzpRZ0OnbYsTMo8oOisqoqEKzi/view?usp=sharing' },
+                  { name: 'MySQL', link: 'https://drive.google.com/file/d/1jF3zN1Ecp5yUa-SXFu_uIQ0HhCrE6xOG/view?usp=sharing' },
+                  { name: 'GitHub Foundations', link: 'https://drive.google.com/file/d/1X3HARMh4VaWnRau8UqEa5lfnjTw9ZLat/view' }
+                ].map((cert) => (
+                  <a
+                    key={cert.name}
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all"
+                  >
+                    {cert.name}
+                  </a>
                 ))}
               </div>
             </div>
