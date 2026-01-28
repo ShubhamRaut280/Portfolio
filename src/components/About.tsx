@@ -10,12 +10,7 @@ interface AwardCardProps {
   year: string;
   link?: string;
   description: string;
-}
-interface CertificateProps {
-  name: string;
-  link?: string;
-}
-
+} 
 const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year, link, description }) => (
   <div className="backdrop-blur-xl bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 border border-yellow-500/20 rounded-2xl p-6">
     <div className="flex items-start gap-4">

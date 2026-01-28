@@ -1,9 +1,8 @@
 // components/Hero.tsx
 import React, { useEffect, useState } from 'react';
-import { ArrowDown, Github, Briefcase, Code2, Award, Globe, Smartphone, Cloud, Database, Linkedin } from 'lucide-react';
+import { ArrowDown, Globe, Smartphone, Cloud, Database } from 'lucide-react';
 import CanvasBackground from './CanvasBackground';
 import { useMousePosition } from '../hooks/useMousePosition';
-import { SiLeetcode } from "react-icons/si";
 import Socials from './Socials';
 
 interface HeroCard {
@@ -116,7 +115,7 @@ const Hero: React.FC = () => {
                   <div key={idx} className="backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-xl p-4 text-center hover:border-cyan-400/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,217,255,0.2)] transition-all">
                     <item.icon className={`w-6 h-6 mx-auto mb-2 ${item.color}`} />
                     <div className="text-xs text-gray-400">{item.label}</div>
-                    <div className="font-bold text-sm">{item.value}</div>
+                    {/* <div className="font-bold text-sm">{item.value}</div> */}
                   </div>
                 ))}
               </div>

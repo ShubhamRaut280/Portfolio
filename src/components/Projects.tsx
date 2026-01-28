@@ -1,4 +1,3 @@
-// components/Projects.tsx
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Github, Server,  MessageSquare, Zap, Users } from 'lucide-react';

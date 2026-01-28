@@ -1,5 +1,4 @@
-// components/Experience.tsx
-import React from 'react';
+ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronRight } from 'lucide-react';
 import { type Experience as ExperienceType } from '../types';

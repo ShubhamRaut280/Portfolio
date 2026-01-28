@@ -1,7 +1,6 @@
-// components/Contact.tsx
-import React from 'react';
+ import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Mail, Phone, Linkedin, Github, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import type { ContactInfo } from '../types';
 import Socials from './Socials';
 

@@ -1,5 +1,4 @@
-import React from 'react'
-import { SiLeetcode } from 'react-icons/si'
+ import { SiLeetcode } from 'react-icons/si'
 import { Github, Linkedin } from 'lucide-react'
 const Socials = () => {
     return (

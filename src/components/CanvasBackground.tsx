@@ -1,5 +1,4 @@
-// components/CanvasBackground.tsx
-import React, { useEffect, useRef } from 'react';
+ import React, { useEffect, useRef } from 'react';
 
 interface Particle {
   x: number;
