@@ -1,4 +1,3 @@
-// components/About.tsx
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Trophy, Star, IdCard } from 'lucide-react';
@@ -9,10 +8,15 @@ interface AwardCardProps {
   title: string;
   company: string;
   year: string;
+  link?: string;
   description: string;
 }
+interface CertificateProps {
+  name: string;
+  link?: string;
+}
 
-const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year, description }) => (
+const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year, link, description }) => (
   <div className="backdrop-blur-xl bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 border border-yellow-500/20 rounded-2xl p-6">
     <div className="flex items-start gap-4">
       <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
@@ -21,6 +25,11 @@ const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year,
       <div>
         <h4 className="font-bold text-lg mb-1">{title}</h4>
         <p className="text-sm text-gray-400">{company} • {year}</p>
+        {link && (
+          <a href={link} className="text-sm text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">
+            More Info
+          </a>
+        )}
         <p className="text-sm text-gray-300 mt-2">{description}</p>
       </div>
     </div>
@@ -30,6 +39,8 @@ const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year,
 const About: React.FC = () => {
   const [ref1, isVisible1] = useScrollReveal();
   const [ref2, isVisible2] = useScrollReveal();
+
+  
 
   return (
     <section id="about" className="py-32 relative">
@@ -80,6 +91,7 @@ const About: React.FC = () => {
               icon={Trophy}
               title="Customer Champion Award"
               company="Onelab Ventures"
+              link='https://drive.google.com/file/d/1QUKRPD6DVNWDiajRwz1g_zjMEvZgqAC4/view?usp=sharing'
               year="2025"
               description="Recognized for strong client-first mindset and consistently exceeding customer expectations."
             />
@@ -88,6 +100,7 @@ const About: React.FC = () => {
               icon={Star}
               title="Rising Star Award"
               company="Onelab Ventures"
+              link='https://drive.google.com/file/d/1ZSSrJumJK9RBAA-hVlTycSIHmg_7dsKS/view?usp=sharing'
               year="2025"
               description="Awarded for rapid growth, initiative, and impactful early-stage contributions."
             />
