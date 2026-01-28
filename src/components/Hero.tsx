@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     let animationId: number;
-    
+
     const animate = (): void => {
       setCursorPos(prev => ({
         x: prev.x + (x - prev.x) * 0.1,
@@ -25,22 +25,22 @@ const Hero: React.FC = () => {
       }));
       animationId = requestAnimationFrame(animate);
     };
-    
+
     animate();
-    
+
     return () => cancelAnimationFrame(animationId);
   }, [x, y]);
 
   const cards: HeroCard[] = [
     { icon: Globe, label: 'Web', value: 'React/Node', color: 'text-cyan-400' },
-    { icon: Smartphone, label: 'Mobile', value: 'Flutter', color: 'text-green-400' },
+    { icon: Smartphone, label: 'Mobile', value: 'Kotlin/Flutter/React Native', color: 'text-green-400' },
     { icon: Cloud, label: 'Cloud', value: 'AWS', color: 'text-orange-400' },
-    { icon: Database, label: 'Backend', value: 'Java/Spring', color: 'text-purple-400' },
+    { icon: Database, label: 'Backend', value: 'Java/Node.js/Python', color: 'text-purple-400' },
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div 
+      <div
         className="hidden md:block fixed w-[300px] h-[300px] pointer-events-none z-40 transition-opacity duration-300"
         style={{
           left: cursorPos.x,
@@ -49,37 +49,40 @@ const Hero: React.FC = () => {
           background: 'radial-gradient(circle, rgba(0,217,255,0.15) 0%, transparent 70%)'
         }}
       />
-      
+
       <CanvasBackground />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+      <div className="relative z-10 max-w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400 animate-[float_6s_ease-in-out_infinite]">
+          <div className="inline-flex mt-15 items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400 animate-[float_6s_ease-in-out_infinite]">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             SDE I at Onelab Ventures
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight font-['Space_Grotesk']">
             Shubham<br />
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-x_5s_ease_infinite]">Raut</span><br />
-            <span className="text-gray-500 text-4xl md:text-5xl lg:text-6xl">Full Stack & Mobile Dev</span>
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-x_5s_ease_infinite]">
+              Raut
+            </span>
           </h1>
-          
-          <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-            Building production-grade B2B platforms and mobile applications. 
-            Specializing in React, Node.js microservices, and cross-platform mobile development with Flutter & Kotlin.
+
+          <p className="mt-2 text-gray-500 text-2xl md:text-3xl lg:text-4xl font-['Space_Grotesk']">
+            Full Stack Web & Mobile Dev
           </p>
-          
+
+          <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
+            Results-driven Software Development Engineer experienced in shipping production-grade features in fast-paced environments. Strong background in full-stack development, cloud infrastructure, and real-time systems.          </p>
+
           <div className="flex flex-wrap gap-4">
-            <a 
-              href="#projects" 
+            <a
+              href="#projects"
               className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-cyan-400 hover:scale-105 transition-all flex items-center gap-2"
             >
               View Projects
               <ArrowDown className="w-4 h-4" />
             </a>
-            <a 
-              href="https://github.com/ShubhamRaut280" 
+            <a
+              href="https://github.com/ShubhamRaut280"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08] hover:border-cyan-400/50 transition-all flex items-center gap-2"
@@ -93,24 +96,16 @@ const Hero: React.FC = () => {
             <div className="flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-cyan-400" />
               <span className="text-sm">2+ Years</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Code2 className="w-5 h-5 text-purple-500" />
-              <span className="text-sm">5+ Production Apps</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm">Customer Champion</span>
-            </div>
+            </div> 
           </div>
         </div>
 
-        <div className="relative hidden md:block">
-          <div className="relative w-full aspect-square max-w-md mx-auto">
+        <div className="space-y-8 relative hidden md:block">
+          <div className="relative w-full  max-w-md mx-auto">
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 via-purple-500/20 to-green-400/20 rounded-full blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
             <div className="relative backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08] rounded-3xl p-8 h-full flex flex-col justify-between overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl group-hover:bg-cyan-400/20 transition-all" />
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -122,7 +117,7 @@ const Hero: React.FC = () => {
                   <p className="pl-4">name: <span className="text-green-400">'Shubham Raut'</span>,</p>
                   <p className="pl-4">role: <span className="text-green-400">'SDE I'</span>,</p>
                   <p className="pl-4">location: <span className="text-green-400">'Pune, India'</span>,</p>
-                  <p className="pl-4">stack: [<span className="text-green-400">'React'</span>, <span className="text-green-400">'Node'</span>, <span className="text-green-400">'Flutter'</span>],</p>
+                  <p className="pl-4">stack: [<span className="text-green-400">'Java'</span>, <span className='text-green-400'>'Python'</span>, <span className="text-green-400">'Node'</span>, <span className="text-green-400">'React'</span> ],</p>
                   <p className="pl-4">awards: [<span className="text-green-400">'Customer Champion'</span>, <span className="text-green-400">'Rising Star'</span>]</p>
                   <p>{'}'};</p>
                 </div>
