@@ -105,13 +105,7 @@ const Hero: React.FC = () => {
               <SiLeetcode className="w-4 h-4" />
             </a>
           </div>
-
-          <div className="flex gap-6 pt-4 text-gray-500">
-            <div className="flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-cyan-400" />
-              <span className="text-sm">2+ Years</span>
-            </div>
-          </div>
+ 
         </div>
 
         <div className="space-y-8 relative hidden md:block">

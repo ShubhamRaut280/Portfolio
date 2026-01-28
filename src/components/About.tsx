@@ -35,7 +35,7 @@ const About: React.FC = () => {
     <section id="about" className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div 
+          <div
             ref={ref1}
             className={`transition-all duration-800 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
@@ -45,16 +45,13 @@ const About: React.FC = () => {
             </h3>
             <div className="space-y-4 text-gray-400 leading-relaxed">
               <p>
-                I'm a Software Development Engineer I at Onelab Ventures, Pune, specializing in building production-grade B2B e-commerce platforms and mobile applications. My expertise spans React PWAs, Node.js microservices, and cross-platform mobile development.
-              </p>
-              <p>
-                With experience across healthcare, emergency response, and analytics domains, I focus on writing clean, efficient code that delivers measurable results—like the 20% performance improvement I achieved through component refactoring at ResoluteAI.
-              </p>
-              <p>
-                Currently working with AWS ECS (Fargate), Redis, BullMQ, and containerized architectures to build robust, scalable systems.
-              </p>
+                Software Development Engineer with hands-on experience building scalable, production-grade web and mobile applications.
+                Strong background in designing microservices, real-time systems, and event-driven architectures using Redis, BullMQ, and WebSockets.              </p>              <p>
+                Experienced in deploying and operating cloud-native applications on AWS using ECS (Fargate), S3, CloudFront, ALB, and containerized Docker workflows.
+                Comfortable working across the full stack, owning features end-to-end from API design to frontend delivery and CI/CD automation.
+                Driven by a passion for solving real-world problems, writing maintainable code, and continuously learning modern engineering practices.              </p>
             </div>
-            
+
             <div className="flex gap-4 mt-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-cyan-400">B.E.</div>
@@ -65,7 +62,7 @@ const About: React.FC = () => {
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-500">Diploma</div>
                 <div className="text-sm text-gray-500">Engineering</div>
-                <div className="text-xs text-gray-600">GPK Khamgaon</div>
+                <div className="text-xs text-gray-600">Government Polytechnic Khamgaon</div>
               </div>
               <div className="w-px bg-white/10" />
               <div className="text-center">
@@ -75,11 +72,11 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          <div 
+          <div
             ref={ref2}
             className={`space-y-6 transition-all duration-800 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            <AwardCard 
+            <AwardCard
               icon={Trophy}
               title="Customer Champion Award"
               company="Onelab Ventures"
@@ -87,7 +84,7 @@ const About: React.FC = () => {
               description="Recognized for strong client-first mindset and consistently exceeding customer expectations."
             />
 
-            <AwardCard 
+            <AwardCard
               icon={Star}
               title="Rising Star Award"
               company="Onelab Ventures"
