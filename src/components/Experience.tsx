@@ -4,25 +4,25 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronRight } from 'lucide-react';
 import { type Experience as ExperienceType } from '../types';
 
-interface ExperienceCardProps extends ExperienceType {}
+interface ExperienceCardProps extends ExperienceType { }
 
-const ExperienceCard: React.FC<ExperienceCardProps> = ({ 
-  title, 
-  company, 
-  period, 
-  location, 
-  points, 
-  tags, 
-  color 
+const ExperienceCard: React.FC<ExperienceCardProps> = ({
+  title,
+  company,
+  period,
+  location,
+  points,
+  tags,
+  color
 }) => {
   const [ref, isVisible] = useScrollReveal();
-  
+
   return (
-    <div 
+    <div
       ref={ref}
-      className={`backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl p-8 relative overflow-hidden group hover:border-cyan-400/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,217,255,0.2)] transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      className={`h-full backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl p-8 relative overflow-hidden group hover:border-cyan-400/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,217,255,0.2)] transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
     >
-      <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -mr-32 -mt-32 transition-all ${color}`} />
+      <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl transition-all ${color}`} />
       <div className="relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
           <div>
@@ -66,7 +66,7 @@ const Experience: React.FC = () => {
         "Designed and deployed containerized services on AWS ECS (Fargate) with auto-scaling, ALB-based traffic routing, and Docker image management via ECR.",
         "Built end-to-end CI/CD pipelines using GitLab CI/CD and deployed frontend apps on AWS S3 + CloudFront."
       ],
-      tags: ["React PWA", "Node.js", "AWS ECS", "Redis", "BullMQ", "Docker", "TypeScript"],
+      tags: ["React + PWA", "Node.js", "AWS", "Postgres", "Redis", "BullMQ", "Docker", "TypeScript"],
       color: "bg-cyan-400/5 group-hover:bg-cyan-400/10"
     },
     {
@@ -80,24 +80,25 @@ const Experience: React.FC = () => {
         "Built secure REST APIs and modernized legacy Java modules by migrating to Kotlin.",
         "Implemented WebRTC video calling, geofenced live tracking, and health data integrations using Google Fit and Health Connect."
       ],
-      tags: ["Flutter", "Kotlin", "WebRTC", "Google Fit", "Health Connect", "REST APIs"],
+      tags: ["Java", "Kotlin", "Flutter", "WebRTC", "Google Fit/Health Connect", "REST APIs"],
       color: "bg-purple-500/5 group-hover:bg-purple-500/10"
     }
   ];
 
   return (
     <section id="experience" className="py-32 relative bg-[#111111]">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-screen mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">Work Experience</h2>
           <h3 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk']">Professional Journey</h3>
         </div>
 
-        <div className="space-y-8 max-w-4xl mx-auto">
+        <div className="max-w-screen mx-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {experiences.map((exp: ExperienceType, idx: number) => (
             <ExperienceCard key={idx} {...exp} />
           ))}
         </div>
+
       </div>
     </section>
   );

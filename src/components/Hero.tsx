@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
 
       <div className="relative z-10 max-w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
-          <div className="inline-flex mt-15 items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400 animate-[float_6s_ease-in-out_infinite]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400 animate-[float_6s_ease-in-out_infinite]">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             SDE I at Onelab Ventures
           </div>
