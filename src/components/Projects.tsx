@@ -1,12 +1,10 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe, AlertCircle, AlertTriangle, Camera, Brush } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Camera, Brush } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
-import { DiDocker } from 'react-icons/di';
-import { FaDocker } from 'react-icons/fa';
+ import { FaDocker } from 'react-icons/fa';
 import { SiSwagger } from 'react-icons/si';
-import { CgWebsite } from 'react-icons/cg';
-
+ 
 interface ProjectCardProps extends Project { }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
