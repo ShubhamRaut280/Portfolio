@@ -1,6 +1,6 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe, AlertCircle, AlertTriangle } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
 import { DiDocker } from 'react-icons/di';
 import { FaDocker } from 'react-icons/fa';
@@ -115,8 +115,20 @@ const Projects: React.FC = () => {
         { url: "https://github.com/ShubhamRaut280/skillsphere", icon: Github, label: "Source", type: "Marketplace" },
         { url: "https://local-services.web.app/", icon: Globe, label: "Live Demo", type: "Demo" }
       ]
+    },
+    {
+      title: "Alertmate Application",
+      description: "Android application for emergency support, designed for real-time assistance during critical situations.",
+      points: ["Family management with member addition", "Live location tracking via Firebase Realtime Database", "Crash detection using accelerometer data", "Emergency trigger via power button (4 presses)"],
+      tech: ["Java", "Kotlin", "Firebase"],
+      icon: AlertTriangle,
+      gradient: "bg-gradient-to-br from-red-900/50 to-yellow-900/50",
+      tags: ["Android", "Emergency"],
+      links: [
+        { url: "https://github.com/ShubhamRaut280/Alertmate", icon: Github, label: "Source", type: "Safety App" }
+      ]
     }
-    
+
   ];
 
   return (
