@@ -1,6 +1,6 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe, AlertCircle, AlertTriangle } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe, AlertCircle, AlertTriangle, Camera, Brush } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
 import { DiDocker } from 'react-icons/di';
 import { FaDocker } from 'react-icons/fa';
@@ -117,6 +117,43 @@ const Projects: React.FC = () => {
       ]
     },
     {
+      title: "Collaborative Canvas App",
+      description: "A real-time collaborative drawing app where users can create or join rooms via room codes, enabling synchronized canvas interactions and live messaging powered entirely by Firebase.",
+      points: [
+        "Real-time collaborative canvas and stroke sync",
+        "Live room-based chat for instant user communication",
+        "Real-time data sync using Firebase Realtime Database",
+        "Push notifications for messages, invites, and join requests using FCM",
+
+      ],
+      tech: [
+        "React Native",
+        "Firebase Realtime Database",
+        "Firestore",
+        "Firebase Auth",
+        "FCM"
+      ],
+      icon: Brush,
+      gradient: "bg-gradient-to-br from-indigo-900/60 to-cyan-900/60",
+      tags: ["Mobile", "Real-Time", "Collaboration", "Chat"],
+      links: [
+        {
+          url: "https://github.com/ShubhamRaut280/collaborative-canvas",
+          icon: Github,
+          label: "Frontend",
+          type: "Collaborative App"
+        },
+        // {
+        //   url: "https://github.com/ShubhamRaut280/canva-app-backend",
+        //   icon: Github,
+        //   label: "Backend",
+        //   type: "Realtime Services"
+        // }
+      ]
+    }
+
+    ,
+    {
       title: "Alertmate Application",
       description: "Android application for emergency support, designed for real-time assistance during critical situations.",
       points: ["Family management with member addition", "Live location tracking via Firebase Realtime Database", "Crash detection using accelerometer data", "Emergency trigger via power button (4 presses)"],
@@ -127,7 +164,29 @@ const Projects: React.FC = () => {
       links: [
         { url: "https://github.com/ShubhamRaut280/Alertmate", icon: Github, label: "Source", type: "Safety App" }
       ]
-    }
+    },
+    {
+      title: "PC Unlock Trigger",
+      description: "Windows security monitoring application that captures photos on PC unlock and sends instant Telegram alerts for remote device monitoring.",
+      points: [
+        "Automatic camera capture on Windows startup/unlock",
+        "Real-time Telegram notifications with photo evidence",
+        "Timestamp-based photo organization and logging",
+        "Windows Registry integration for auto-startup",
+      ],
+      tech: ["Python", "Telegram Bot API"],
+      icon: Camera,
+      gradient: "bg-gradient-to-br from-blue-900/50 to-purple-900/50",
+      tags: ["Windows", "Security", "Monitoring"],
+      links: [
+        {
+          url: "https://github.com/ShubhamRaut280/PcUnlockTrigger",
+          icon: Github,
+          label: "Source",
+          type: "Security Monitor"
+        }
+      ]
+    },
 
   ];
 
