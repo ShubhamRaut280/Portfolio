@@ -1,5 +1,5 @@
  import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { type NavLink } from '../types';
 
 const Navigation: React.FC = () => {
@@ -44,11 +44,12 @@ const Navigation: React.FC = () => {
           </div>
 
           <a 
-            href="#contact"
+            href="/resume.pdf"
+            download="Shubham_Raut_Resume.pdf"
             className="hidden md:flex px-6 py-2 rounded-full border border-white/20 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all text-sm font-medium items-center gap-2 group"
           >
-            Hire Me
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            Resume
+            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
           </a>
 
           <button 
