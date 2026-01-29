@@ -1,24 +1,28 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server,  MessageSquare, Zap, Users } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Webcam, Earth, EarthIcon, Globe } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
+import { DiDocker } from 'react-icons/di';
+import { FaDocker } from 'react-icons/fa';
+import { SiSwagger } from 'react-icons/si';
+import { CgWebsite } from 'react-icons/cg';
 
-interface ProjectCardProps extends Project {}
+interface ProjectCardProps extends Project { }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ 
-  title, 
-  description, 
-  points, 
-  tech, 
-  links, 
-  icon: Icon, 
-  gradient, 
-  tags 
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
+  description,
+  points,
+  tech,
+  links,
+  icon: Icon,
+  gradient,
+  tags
 }) => {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <div 
+    <div
       ref={ref}
       className={`backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl overflow-hidden group hover:border-cyan-400/30 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
     >
@@ -50,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex items-center justify-between pt-4 border-t border-white/5">
           <div className="flex gap-3">
             {links.map((link: ProjectLink, idx: number) => (
-              <a 
+              <a
                 key={idx}
                 href={link.url}
                 target="_blank"
@@ -75,13 +79,14 @@ const Projects: React.FC = () => {
       title: "LiveThread",
       description: "Chrome extension that converts any webpage into a live discussion forum using WebSockets.",
       points: ["Socket.io & Redis Pub/Sub", "Dynamic URL-based rooms", "Real-time user presence"],
-      tech: ["React", "TypeScript", "Node.js", "MongoDB"],
+      tech: ["React", "TypeScript", "Node.js", "Redis", "MongoDB"],
       icon: MessageSquare,
       gradient: "bg-gradient-to-br from-purple-900/50 to-blue-900/50",
       tags: ["Web", "Real-time"],
       links: [
-        { url: "https://github.com/ShubhamRaut280/liveThread", icon: Github, label: "Frontend", type: "Chrome Extension" },
-        { url: "https://github.com/shubham9689/livethread-backend", icon: Server, label: "Backend", type: "Backend" }
+        { url: "https://github.com/ShubhamRaut280/liveThread-frontend", icon: Github, label: "Frontend", type: "Chrome Extension" },
+        { url: "https://github.com/ShubhamRaut280/liveThread-backend", icon: Server, label: "Backend", type: "Backend" },
+        { url: "https://hub.docker.com/r/shubham9689/livethread-backend", icon: FaDocker, label: "Docker Image", type: "Docker" }
       ]
     },
     {
@@ -93,7 +98,9 @@ const Projects: React.FC = () => {
       gradient: "bg-gradient-to-br from-green-900/50 to-teal-900/50",
       tags: ["Backend", "Java"],
       links: [
-        { url: "https://github.com/ShubhamRaut280/electro-route", icon: Github, label: "Source", type: "EV Tech" }
+        { url: "https://github.com/ShubhamRaut280/electro-route", icon: Github, label: "Source", type: "EV Tech" },
+        { url: "https://hub.docker.com/r/shubham9689/electro-route", icon: FaDocker, label: "Docker Image", type: "Docker" },
+        { url: "https://electro-route-latest.onrender.com/docs", icon: SiSwagger, label: "API Docs", type: "Documentation" }
       ]
     },
     {
@@ -105,9 +112,11 @@ const Projects: React.FC = () => {
       gradient: "bg-gradient-to-br from-orange-900/50 to-red-900/50",
       tags: ["Full Stack", "Firebase"],
       links: [
-        { url: "https://github.com/ShubhamRaut280/skillsphere", icon: Github, label: "Source", type: "Marketplace" }
+        { url: "https://github.com/ShubhamRaut280/skillsphere", icon: Github, label: "Source", type: "Marketplace" },
+        { url: "https://local-services.web.app/", icon: Globe, label: "Live Demo", type: "Demo" }
       ]
     }
+    
   ];
 
   return (
