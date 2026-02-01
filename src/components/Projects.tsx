@@ -1,6 +1,6 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Camera, Brush } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Brush } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
  import { FaDocker } from 'react-icons/fa';
 import { SiSwagger } from 'react-icons/si';
