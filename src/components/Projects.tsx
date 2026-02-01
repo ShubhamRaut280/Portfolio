@@ -163,25 +163,54 @@ const Projects: React.FC = () => {
         { url: "https://github.com/ShubhamRaut280/Alertmate", icon: Github, label: "Source", type: "Safety App" }
       ]
     },
+    // {
+    //   title: "PC Unlock Trigger",
+    //   description: "Windows security monitoring application that captures photos on PC unlock and sends instant Telegram alerts for remote device monitoring.",
+    //   points: [
+    //     "Automatic camera capture on Windows startup/unlock",
+    //     "Real-time Telegram notifications with photo evidence",
+    //     "Timestamp-based photo organization and logging",
+    //     "Windows Registry integration for auto-startup",
+    //   ],
+    //   tech: ["Python", "Telegram Bot API"],
+    //   icon: Camera,
+    //   gradient: "bg-gradient-to-br from-blue-900/50 to-purple-900/50",
+    //   tags: ["Windows", "Security", "Monitoring"],
+    //   links: [
+    //     {
+    //       url: "https://github.com/ShubhamRaut280/PcUnlockTrigger",
+    //       icon: Github,
+    //       label: "Source",
+    //       type: "Security Monitor"
+    //     }
+    //   ]
+    // },
     {
-      title: "PC Unlock Trigger",
-      description: "Windows security monitoring application that captures photos on PC unlock and sends instant Telegram alerts for remote device monitoring.",
+      title: "RAG PDF Bot",
+      description: "Retrieval-Augmented Generation API that lets you upload PDFs and ask questions about their content using FastAPI and Google Gemini.",
       points: [
-        "Automatic camera capture on Windows startup/unlock",
-        "Real-time Telegram notifications with photo evidence",
-        "Timestamp-based photo organization and logging",
-        "Windows Registry integration for auto-startup",
+        "PDF parsing and text extraction with pypdf",
+        "Text chunking with LangChain RecursiveCharacterTextSplitter",
+        "Vector embeddings with SentenceTransformers",
+        "Pinecone serverless vector database for similarity search",
+        "Gemini-powered Q&A with cited sources"
       ],
-      tech: ["Python", "Telegram Bot API"],
-      icon: Camera,
-      gradient: "bg-gradient-to-br from-blue-900/50 to-purple-900/50",
-      tags: ["Windows", "Security", "Monitoring"],
+      tech: ["FastAPI", "Python", "Pinecone", "Google Gemini", "LangChain", "SentenceTransformers"],
+      icon: Globe,
+      gradient: "bg-gradient-to-br from-cyan-900/50 to-blue-900/50",
+      tags: ["AI", "Backend", "RAG"],
       links: [
         {
-          url: "https://github.com/ShubhamRaut280/PcUnlockTrigger",
+          url: "https://github.com/ShubhamRaut280/rag-based-doc-bot",
           icon: Github,
           label: "Source",
-          type: "Security Monitor"
+          type: "AI API"
+        },
+        {
+          url: "https://hub.docker.com/r/shubham9689/rag-bot",
+          icon: FaDocker,
+          label: "Docker Image",
+          type: "Docker"
         }
       ]
     },
