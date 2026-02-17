@@ -1,9 +1,8 @@
 // components/Hero.tsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ArrowDown, Globe, Smartphone, Cloud, Database } from 'lucide-react';
 import CanvasBackground from './CanvasBackground';
-import { useMousePosition } from '../hooks/useMousePosition';
-import Socials from './Socials';
+ import Socials from './Socials';
 
 interface HeroCard {
   icon: React.ComponentType<{ className?: string }>;
@@ -13,25 +12,7 @@ interface HeroCard {
 }
 
 const Hero: React.FC = () => {
-  const { x, y } = useMousePosition();
-  const [cursorPos, setCursorPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-
-  useEffect(() => {
-    let animationId: number;
-
-    const animate = (): void => {
-      setCursorPos(prev => ({
-        x: prev.x + (x - prev.x) * 0.1,
-        y: prev.y + (y - prev.y) * 0.1
-      }));
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => cancelAnimationFrame(animationId);
-  }, [x, y]);
-
+   
   const cards: HeroCard[] = [
     { icon: Globe, label: 'Web', value: 'React/Node', color: 'text-cyan-400' },
     { icon: Smartphone, label: 'Mobile', value: 'Kotlin/Flutter/React Native', color: 'text-green-400' },
@@ -41,21 +22,12 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div
-        className="hidden md:block fixed w-[300px] h-[300px] pointer-events-none z-40 transition-opacity duration-300"
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(0,217,255,0.15) 0%, transparent 70%)'
-        }}
-      />
-
+       
       <CanvasBackground />
 
       <div className="relative z-10 max-w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400 animate-[float_6s_ease-in-out_infinite]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             SDE I at Onelab Ventures
           </div>
