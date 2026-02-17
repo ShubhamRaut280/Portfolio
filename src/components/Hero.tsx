@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight font-['Space_Grotesk']">
             Shubham<br />
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-x_5s_ease_infinite]">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent bg-[length:200%_200%]">
               Raut
             </span>
           </h1>
@@ -63,8 +63,7 @@ const Hero: React.FC = () => {
           <div className="relative w-full  max-w-md mx-auto">
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 via-purple-500/20 to-green-400/20 rounded-full blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
             <div className="relative backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08] rounded-3xl p-8 h-full flex flex-col justify-between overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl group-hover:bg-cyan-400/20 transition-all" />
-
+ 
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
