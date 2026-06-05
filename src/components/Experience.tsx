@@ -60,10 +60,11 @@ const Experience: React.FC = () => {
       location: "Pune (Onsite)",
       period: "Jun 2025 – Present",
       points: [
-        "Building production-grade B2B e-commerce platform using React PWA and Node.js microservices, delivering core modules like auctions, inventory, and order workflows.",
-        "Implemented asynchronous event-driven processing using Redis and BullMQ for real-time auctions, notifications, and background jobs.",
-        "Designed and deployed containerized services on AWS ECS (Fargate) with auto-scaling, ALB-based traffic routing, and Docker image management via ECR.",
-        "Built end-to-end CI/CD pipelines using GitLab CI/CD and deployed frontend apps on AWS S3 + CloudFront."
+        "Built and maintained a production-grade B2B e-commerce platform that processed ₹440+ crore in orders and payments within the first 5 months of launch.",
+        "Developed a multi-market analytics platform consolidating operational, sales, and marketing data into unified dashboards with drill-down reporting by market, channel, and business segment.",
+        "Built an AI-driven assignment evaluation platform featuring role-based workflows, timed assessments, automated submissions, rubric-based scoring, and review pipelines.",
+        "Implemented asynchronous event-driven architectures using Redis and BullMQ for auctions, notifications, background jobs, and real-time business workflows.",
+        "Designed and deployed cloud-native infrastructure on AWS ECS (Fargate), ECR, S3, CloudFront, ALB, Aurora, and ElastiCache, while establishing CI/CD pipelines using GitLab CI/CD and AWS Amplify."
       ],
       tags: ["React + PWA", "Node.js", "AWS", "Postgres", "Redis", "BullMQ", "Docker", "TypeScript"],
       color: "bg-cyan-400/5 group-hover:bg-cyan-400/10"
