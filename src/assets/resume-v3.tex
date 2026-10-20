@@ -81,6 +81,8 @@
   \iconlink{\faEnvelope}{mailto:rautshubham280@gmail.com}{rautshubham280@gmail.com} \quad
   \iconlink{\faGlobe}{https://www.shubhamraut.me/}{shubhamraut.me} \quad
   \iconlink{\faLinkedin}{https://www.linkedin.com/in/rautshubham280/}{linkedin.com/in/rautshubham280} \\[2pt]
+  % Phone appears only in the private build, which defines \resumePhone (see scripts/build-resume.mjs)
+  \ifdefined\resumePhone\iconlink{\faPhone}{tel:\resumePhoneTel}{\resumePhone} \quad\fi
   \iconlink{\faGithub}{https://github.com/ShubhamRaut280}{github.com/ShubhamRaut280} \quad
   \iconlink{\faCode}{https://leetcode.com/u/Shubham223/}{leetcode.com/u/Shubham223}
 \end{center}

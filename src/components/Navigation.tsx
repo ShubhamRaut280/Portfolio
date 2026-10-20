@@ -3,6 +3,12 @@ import { Menu, X, Download, Eye } from 'lucide-react';
 import { type NavLink } from '../types';
 import resumePdf from '../assets/resume.pdf';
 
+// Private resume (with phone number). Only exists when the build had RESUME_PHONE set;
+// downloaded by triple-clicking the logo. Not linked anywhere visible.
+const privateResumePdf = Object.values(
+  import.meta.glob<string>('../assets/resume-private.pdf', { eager: true, query: '?url', import: 'default' })
+)[0];
+
 const NAV_LINKS: NavLink[] = [
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#experience' },
@@ -45,6 +51,20 @@ const Navigation: React.FC = () => {
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback((): void => setIsMobileMenuOpen(false), []);
+
+  const logoClicks = useRef<number[]>([]);
+  const handleLogoClick = (): void => {
+    closeMenu();
+    if (!privateResumePdf) return;
+    const now = Date.now();
+    logoClicks.current = [...logoClicks.current.filter((t) => now - t < 800), now];
+    if (logoClicks.current.length < 3) return;
+    logoClicks.current = [];
+    const link = document.createElement('a');
+    link.href = privateResumePdf;
+    link.download = 'Shubham_Raut_Resume.pdf';
+    link.click();
+  };
 
   // Scroll-driven state: progress bar, compact bar, active section — rAF-throttled.
   useEffect(() => {
@@ -135,7 +155,7 @@ const Navigation: React.FC = () => {
             <a
               href="#"
               aria-label="Shubham Raut — back to top"
-              onClick={closeMenu}
+              onClick={handleLogoClick}
               className={`rounded-md font-display text-2xl font-bold tracking-tighter ${focusRing}`}
             >
               SR<span className="text-cyan-400">.</span>

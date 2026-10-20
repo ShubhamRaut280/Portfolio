@@ -26,3 +26,4 @@ dist-ssr
 # Resume build (generated from src/assets/resume.tex)
 .cache
 src/assets/resume.pdf
+src/assets/resume-private.pdf

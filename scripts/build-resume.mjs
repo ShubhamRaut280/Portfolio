@@ -2,7 +2,7 @@
 // The version is picked in src/constants/resume.ts.
 // Uses a system `tectonic` if present, otherwise downloads a pinned binary into .cache/.
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, renameSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RESUME_VERSION as version } from '../src/constants/resume.ts';
 
@@ -52,3 +52,34 @@ mkdirSync(outDir, { recursive: true });
 execFileSync(tectonic, ['--outdir', outDir, texFile], { stdio: 'inherit' });
 renameSync(join(outDir, `resume-${version}.pdf`), join(assets, 'resume.pdf'));
 console.log(`Built src/assets/resume.pdf from resume-${version}.tex`);
+
+// Private copy with the phone number in the header. The number comes from RESUME_PHONE
+// (.env.local locally, project env vars on Vercel) so it never lands in git.
+const privatePdf = join(assets, 'resume-private.pdf');
+try {
+  process.loadEnvFile(join(root, '.env.local'));
+} catch {
+  // No .env.local: fall back to the real environment.
+}
+const phone = process.env.RESUME_PHONE?.trim();
+
+const texSource = readFileSync(texFile, 'utf8');
+
+if (!phone) {
+  rmSync(privatePdf, { force: true });
+  console.log('RESUME_PHONE not set: skipped the private resume.');
+} else if (!texSource.includes('\\resumePhone')) {
+  rmSync(privatePdf, { force: true });
+  console.warn(`resume-${version}.tex has no \\resumePhone slot: skipped the private resume.`);
+} else {
+  if (!/^\+?[\d\s-]{7,20}$/.test(phone)) {
+    throw new Error('RESUME_PHONE must contain only digits, spaces, dashes and an optional leading +.');
+  }
+  const tel = phone.replace(/[\s-]/g, '');
+  const privateTex = join(outDir, 'resume-private.tex');
+  writeFileSync(privateTex, `\\def\\resumePhone{${phone}}\\def\\resumePhoneTel{${tel}}\n` + texSource);
+  execFileSync(tectonic, ['--outdir', outDir, privateTex], { stdio: 'inherit' });
+  renameSync(join(outDir, 'resume-private.pdf'), privatePdf);
+  rmSync(privateTex, { force: true });
+  console.log('Built src/assets/resume-private.pdf (with phone number)');
+}
