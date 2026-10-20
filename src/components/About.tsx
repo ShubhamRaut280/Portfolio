@@ -52,8 +52,8 @@ const About: React.FC = () => {
             <div className="space-y-4 text-gray-400 leading-relaxed">
               <p>
                 Software Development Engineer with hands-on experience building scalable, production-grade web and mobile applications.
-                Strong background in designing microservices, real-time systems, and event-driven architectures using Redis, BullMQ, and WebSockets.              </p>              <p>
-                Experienced in deploying and operating cloud-native applications on AWS using ECS (Fargate), S3, CloudFront, ALB, and containerized Docker workflows.
+                Strong background in designing microservices, real-time systems, and event-driven architectures using Redis, BullMQ, Celery, and WebSockets, and in building AI agent platforms with LLMs and MCP.              </p>              <p>
+                Experienced in deploying and operating cloud-native applications on AWS (ECS Fargate, S3, CloudFront, ALB) and GCP Cloud Run with containerized Docker workflows.
                 Comfortable working across the full stack, owning features end-to-end from API design to frontend delivery and CI/CD automation.
                 Driven by a passion for solving real-world problems, writing maintainable code, and continuously learning modern engineering practices.              </p>
             </div>
@@ -107,11 +107,11 @@ const About: React.FC = () => {
               </h4>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { name: 'Accenture Nordics Developer', link: 'https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing' },
-                  { name: 'Postman API Expert', link: 'https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA' },
+                  { name: 'Claude Certified Architect – Foundations', link: 'https://www.credly.com/badges/708fc779-3ff4-47cb-90e1-b9b67bb68fb2/public_url' },
+                  { name: 'Accenture Nordics Developer Program', link: 'https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing' },
+                  { name: 'Postman API Fundamentals Student Expert', link: 'https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA' },
                   { name: 'Java', link: 'https://drive.google.com/file/d/1LMBDrknzpRZ0OnbYsTMo8oOisqoqEKzi/view?usp=sharing' },
                   { name: 'MySQL', link: 'https://drive.google.com/file/d/1jF3zN1Ecp5yUa-SXFu_uIQ0HhCrE6xOG/view?usp=sharing' },
-                  { name: 'GitHub Foundations', link: 'https://drive.google.com/file/d/1X3HARMh4VaWnRau8UqEa5lfnjTw9ZLat/view' }
                 ].map((cert) => (
                   <a
                     key={cert.name}

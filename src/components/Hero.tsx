@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           </p>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-            Results-driven Software Development Engineer experienced in shipping production-grade features in fast-paced environments. Strong background in full-stack development, cloud infrastructure, and real-time systems.          </p>
+            Results-driven Software Development Engineer experienced in shipping production-grade features in fast-paced environments. Strong background in full-stack development, cloud infrastructure, real-time systems, and AI agent platforms.          </p>
 
           <div className="flex flex-wrap gap-4">
             <a

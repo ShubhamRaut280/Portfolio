@@ -12,10 +12,11 @@ const Skills: React.FC = () => {
   const cloudTools: CloudTool[] = [
     { category: "Languages", items: ["Java", "JavaScript / TypeScript", "Python / C++", "SQL"], color: "text-green-400" },
     { category: "Backend", items: ["Node.js / Express.js", "FastAPI", "Spring Boot"], color: "text-blue-400" },
-    { category: "Frontend", items: ["React", "HTML5 / CSS3", "Tailwind CSS"], color: "text-purple-400" },
+    { category: "Frontend", items: ["React", "Redux Toolkit", "HTML5 / CSS3", "Tailwind CSS"], color: "text-purple-400" },
     { category: "Databases", items: ["MySQL / PostgreSQL", "MongoDB", "Redis", "Firebase Firestore / Firebase RealtimeDB"], color: "text-green-400" },
-    { category: "Cloud Platforms", items: ["AWS ECS (Fargate)", "EC2 / ECR / S3", "CloudFront / ALB", "Aurora / ElastiCache"], color: "text-cyan-400" },
-    { category: "DevOps & Tools", items: ["Docker", "GitLab CI/CD", "Git / GitHub", "Postman", "Firebase",], color: "text-purple-400" },
+    { category: "Cloud Platforms", items: ["AWS ECS (Fargate)", "EC2 / ECR / S3", "CloudFront / ALB", "Aurora / ElastiCache", "GCP (Cloud Run, Cloud Storage)"], color: "text-cyan-400" },
+    { category: "DevOps & Tools", items: ["Docker", "GitLab CI/CD", "AWS Amplify", "Git / GitHub", "Postman", "Firebase"], color: "text-purple-400" },
+    { category: "AI / LLM", items: ["LLM Agents", "MCP", "LangChain", "LangGraph"], color: "text-pink-400" },
     {category: "Mobile Development", items: ["Native Android","React Native", "Flutter"], color: "text-blue-400" },
     { category: "Operating Systems", items: ["Linux / Windows"], color: "text-orange-400" }
   ];

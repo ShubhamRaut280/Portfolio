@@ -60,13 +60,15 @@ const Experience: React.FC = () => {
       location: "Pune (Onsite)",
       period: "Jun 2025 – Present",
       points: [
-        "Built and maintained a production-grade B2B e-commerce platform that processed ₹440+ crore in orders and payments within the first 5 months of launch.",
+        "Built and maintained a production-grade B2B e-commerce platform that processed ₹650+ crore in orders and payments within the first 6 months of launch.",
+        "Building an AI-powered retrosynthesis platform for molecule synthesis planning, with LLM agents, an MCP tool server, async Celery pipelines and ML services on GCP Cloud Run.",
+        "Delivered real-time result streaming (SSE) and an AI-assisted quoting system that turns synthesis routes into cost and timeline quotes.",
         "Developed a multi-market analytics platform consolidating operational, sales, and marketing data into unified dashboards with drill-down reporting by market, channel, and business segment.",
         "Built an AI-driven assignment evaluation platform featuring role-based workflows, timed assessments, automated submissions, rubric-based scoring, and review pipelines.",
-        "Implemented asynchronous event-driven architectures using Redis and BullMQ for auctions, notifications, background jobs, and real-time business workflows.",
+        "Implemented asynchronous event-driven architectures using Redis and BullMQ for notifications, background jobs, and real-time business workflows.",
         "Designed and deployed cloud-native infrastructure on AWS ECS (Fargate), ECR, S3, CloudFront, ALB, Aurora, and ElastiCache, while establishing CI/CD pipelines using GitLab CI/CD and AWS Amplify."
       ],
-      tags: ["React + PWA", "Node.js", "AWS", "Postgres", "Redis", "BullMQ", "Docker", "TypeScript"],
+      tags: ["React + PWA", "Node.js", "TypeScript", "FastAPI", "Celery", "LLM Agents", "MCP", "AWS", "GCP", "Postgres", "Redis", "BullMQ", "Docker"],
       color: "bg-cyan-400/5 group-hover:bg-cyan-400/10"
     },
     {

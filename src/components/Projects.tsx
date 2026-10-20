@@ -1,6 +1,6 @@
 import React from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Brush } from 'lucide-react';
+import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Brush, FlaskConical } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
  import { FaDocker } from 'react-icons/fa';
 import { SiSwagger } from 'react-icons/si';
@@ -49,23 +49,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <span key={idx} className="text-xs text-gray-400">{t}</span>
           ))}
         </div>
-        <div className="flex items-center justify-between pt-4 border-t border-white/5">
-          <div className="flex gap-3">
-            {links.map((link: ProjectLink, idx: number) => (
-              <a
-                key={idx}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-white transition-colors"
-                title={link.label}
-              >
-                <link.icon className="w-5 h-5" />
-              </a>
-            ))}
+        {links.length > 0 && (
+          <div className="flex items-center justify-between pt-4 border-t border-white/5">
+            <div className="flex gap-3">
+              {links.map((link: ProjectLink, idx: number) => (
+                <a
+                  key={idx}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-white transition-colors"
+                  title={link.label}
+                >
+                  <link.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+            <span className="text-xs text-gray-600">{links[0].type}</span>
           </div>
-          <span className="text-xs text-gray-600">{links[0]?.type || 'Project'}</span>
-        </div>
+        )}
       </div>
     </div>
   );
@@ -76,7 +78,7 @@ const Projects: React.FC = () => {
     {
       title: "LiveThread",
       description: "Chrome extension that converts any webpage into a live discussion forum using WebSockets.",
-      points: ["Socket.io & Redis Pub/Sub", "Dynamic URL-based rooms", "Real-time user presence"],
+      points: ["Socket.io & Redis Pub/Sub", "Dynamic URL-based rooms", "Real-time user presence", "Node.js + MongoDB backend on Docker Hub"],
       tech: ["React", "TypeScript", "Node.js", "Redis", "MongoDB"],
       icon: MessageSquare,
       gradient: "bg-gradient-to-br from-purple-900/50 to-blue-900/50",
@@ -86,6 +88,23 @@ const Projects: React.FC = () => {
         { url: "https://github.com/ShubhamRaut280/liveThread-backend", icon: Server, label: "Backend", type: "Backend" },
         { url: "https://hub.docker.com/r/shubham9689/livethread-backend", icon: FaDocker, label: "Docker Image", type: "Docker" }
       ]
+    },
+    {
+      title: "AI-Powered Retrosynthesis Platform",
+      description: "AI platform for molecule synthesis planning, built at Onelab Ventures, with LLM agents, async pipelines and ML services.",
+      points: [
+        "Event-driven microservices: FastAPI, Celery queues per workload, ML services on GCP Cloud Run",
+        "MCP tool server exposing platform capabilities to an LLM orchestrator agent",
+        "Async job orchestration with self-healing worker pools",
+        "Real-time streaming (SSE) with save-first persistence and prefetching",
+        "Self-hosted transformer-based reaction prediction service",
+        "Redux Toolkit / RTK Query state and interactive graph visualizations"
+      ],
+      tech: ["FastAPI", "Celery", "Redis", "PostgreSQL", "React", "TypeScript", "LLM Agents", "MCP", "GCP"],
+      icon: FlaskConical,
+      gradient: "bg-gradient-to-br from-emerald-900/50 to-cyan-900/50",
+      tags: ["AI", "Full Stack"],
+      links: []
     },
     {
       title: "ElectroRoute",
@@ -104,7 +123,7 @@ const Projects: React.FC = () => {
     {
       title: "SkillSphere",
       description: "Freelancing platform connecting clients with service providers. Real-time notifications and review systems.",
-      points: ["Firebase backend", "Freelancer discovery", "Job request management"],
+      points: ["Firebase backend", "Freelancer discovery", "Job request management", "Profiles with past work, reviews and ratings"],
       tech: ["React", "Node.js", "Firebase"],
       icon: Users,
       gradient: "bg-gradient-to-br from-orange-900/50 to-red-900/50",
