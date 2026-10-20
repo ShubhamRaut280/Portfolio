@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Resume build (generated from src/assets/resume.tex)
+.cache
+src/assets/resume.pdf

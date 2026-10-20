@@ -1,0 +1,189 @@
+%-------------------------
+% Resume in LaTeX -- v2 (compact, two-column, one US-letter page)
+% Based off of: https://github.com/sb2nov/resume and https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs
+% License : MIT
+%-------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[letterpaper,margin=0.4in]{geometry}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+% pdfTeX-only; Tectonic (XeTeX) writes Unicode text natively, so guard it.
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\pagestyle{empty}
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{0.25in}
+
+\definecolor{accent}{RGB}{0,51,153}
+\newcommand{\link}[2]{\href{#1}{\textcolor{accent}{#2}}}
+
+% Sections: small caps, rule underneath
+\titleformat{\section}{\color{accent}\scshape\large}{}{0em}{}[\vspace{-3pt}\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{4pt}
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{\item #1}
+
+% {title}{dates}{subtitle}{location}
+\newcommand{\resumeSubheading}[4]{
+  \item[]
+    \begin{tabular*}{\linewidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+      \textbf{#1} & \textit{\small #2} \\
+      \textit{\small #3} & \textit{\small #4} \\
+    \end{tabular*}
+}
+
+% {title}{right side}{tech stack}
+\newcommand{\resumeProjectHeading}[3]{
+  \item[]
+    \begin{tabular*}{\linewidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+      #1 & \textit{\small #2} \\
+      \multicolumn{2}{@{}l@{}}{\textit{\small #3}} \\
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0pt, label={}, nosep, itemsep=3pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.14in, label=\textbullet, nosep, itemsep=1pt, topsep=1pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+  {\Huge \scshape \textbf{Shubham Raut}} \\[3pt]
+  {\large Software Development Engineer} \\[3pt]
+  \footnotesize
+  Pune, India $|$
+  \link{mailto:rautshubham280@gmail.com}{rautshubham280@gmail.com} $|$
+  \link{https://www.linkedin.com/in/rautshubham280/}{linkedin.com/in/rautshubham280} $|$
+  \link{https://github.com/ShubhamRaut280/}{github.com/ShubhamRaut280} $|$
+  \link{https://leetcode.com/u/Shubham223/}{leetcode.com/u/Shubham223}
+\end{center}
+\vspace{-8pt}
+
+%-----------EDUCATION-----------
+{\small
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\linewidth}{@{}>{\centering\arraybackslash}X >{\centering\arraybackslash}X c c@{}}
+  \hline
+  \textbf{Degree} & \textbf{Institute} & \textbf{Year} & \textbf{CGPA/\%} \\
+  \hline
+  BE (Computer Science and Engineering) & Sinhgad College of Engineering, Pune & 2022 -- 2025 & \textbf{8.67}/10 \\
+  Diploma & Government Polytechnic Khamgaon & 2019 -- 2022 & \textbf{90.46\%} \\
+  \hline
+\end{tabularx}
+}
+
+\begin{multicols}{2}
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+\resumeSubHeadingListStart
+
+  \resumeSubheading
+    {Onelab Ventures}{Jun'25 -- Present}
+    {Software Development Engineer 1}{Pune, Onsite}
+  \resumeItemListStart
+    \resumeItem{Building a full-stack \textbf{B2B e-commerce platform} with a \textbf{React PWA} frontend and a \textbf{Node.js}, \textbf{PostgreSQL}, \textbf{Redis} and \textbf{BullMQ} backend.}
+    \resumeItem{Developed core modules: \textbf{User Portal}, \textbf{Admin Panel}, \textbf{Inventory Management} and \textbf{Advertisement Management}.}
+    \resumeItem{Implemented real-time \textbf{live product auctions}, \textbf{virtual inventories} and \textbf{product purchase flows} for buyer--seller interaction.}
+    \resumeItem{Engineered a secure \textbf{KYC verification system} for retailer onboarding with \textbf{automated compliance validation}.}
+    \resumeItem{Optimized async communication and background processing with \textbf{Redis queues} and \textbf{BullMQ} for scalable \textbf{event-driven workflows}.}
+    \resumeItem{Converted a \textbf{3-month internship} into a \textbf{full-time SDE role} based on performance and delivery.}
+  \resumeItemListEnd
+
+  \resumeSubheading
+    {ResoluteAI Softwares}{Jan'24 -- Jun'25}
+    {\link{https://drive.google.com/file/d/1Zop4TzPQgXoacC3zv5qZHxM9N1lAF0zq/view?usp=sharing}{Mobile Application Development Intern}}{Bangalore, Remote}
+  \resumeItemListStart
+    \resumeItem{Improved app performance by \textbf{20\%} through systematic \textbf{refactoring} and optimization of frontend components.}
+    \resumeItem{Shipped production Android features: \textbf{WebRTC} peer-to-peer video calling, \textbf{geofenced live tracking} and health monitoring via \textbf{Google Fit} and \textbf{Health Connect} SDKs.}
+    \resumeItem{Contributed to \textbf{4--5 projects} across healthcare, emergency response and analytics, delivering \textbf{full-cycle development}.}
+    \resumeItem{Engineered secure, scalable \textbf{RESTful APIs} powering critical backend operations and integrations.}
+    \resumeItem{Migrated legacy \textbf{Java} modules to \textbf{Kotlin}, yielding cleaner architecture and better maintainability.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.14in, label=\textbullet, nosep, itemsep=1pt]
+  \item \textbf{Languages:} Java $|$ Kotlin $|$ JavaScript $|$ TypeScript $|$ C++ $|$ Python
+  \item \textbf{Frameworks:} Spring Boot $|$ React $|$ Node.js $|$ Flutter $|$ Socket.io
+  \item \textbf{Databases:} PostgreSQL $|$ MySQL $|$ MongoDB $|$ Redis $|$ Firebase
+  \item \textbf{Tools:} Docker $|$ Git $|$ Postman $|$ Swagger $|$ Android Studio $|$ Linux
+\end{itemize}
+
+\columnbreak
+
+%-----------PROJECTS-----------
+\section{Key Projects}
+\resumeSubHeadingListStart
+
+  \resumeProjectHeading
+    {\textbf{\link{https://github.com/ShubhamRaut280/liveThread-frontend}{LiveThread}} -- Chrome Extension}{}{React.js, TypeScript, Node.js, Socket.io, Redis, MongoDB}
+  \resumeItemListStart
+    \resumeItem{Built a \textbf{real-time Chrome extension} that turns any URL into a \textbf{live discussion forum} using \textbf{WebSockets}.}
+    \resumeItem{Designed a scalable \textbf{Socket.io + Redis Pub/Sub} architecture to support \textbf{concurrent users}.}
+    \resumeItem{Implemented dynamic \textbf{URL-based room mapping} and real-time \textbf{user presence tracking}.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{\link{https://github.com/ShubhamRaut280/electro-route}{ElectroRoute}} -- EV Charging Stations}{\link{https://electro-route-latest.onrender.com/docs}{Live Backend}}{Java, Spring Boot, MySQL, Docker, Swagger}
+  \resumeItemListStart
+    \resumeItem{Developed secure \textbf{Spring Boot REST APIs} for user and station management with \textbf{JWT} authentication and authorization.}
+    \resumeItem{Implemented \textbf{location-based search} for nearby stations using latitude/longitude coordinates.}
+    \resumeItem{Modeled a relational \textbf{MySQL schema} for users, stations and their details.}
+    \resumeItem{Containerized with \textbf{Docker} and documented APIs with \textbf{Swagger UI}.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{\link{https://github.com/ShubhamRaut280/Local-service-frontend-react}{SkillSphere}} -- Freelancing Platform}{\link{https://local-services.web.app/}{Live Site}}{React.js, JavaScript, Node.js, Firebase}
+  \resumeItemListStart
+    \resumeItem{Built a \textbf{React + Firebase} platform connecting clients with freelancers, with \textbf{filtering} by skills, location and ratings.}
+    \resumeItem{Job requests trigger \textbf{email and in-app notifications}; job status updates in \textbf{real time} via \textbf{Firebase Realtime Database}.}
+    \resumeItem{Added profiles with past work, plus a \textbf{rating and review system} to build trust.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{\link{https://github.com/ShubhamRaut280/Alertmate}{Alertmate}} -- Emergency Support App}{}{Java, Kotlin, Node.js, Firebase}
+  \resumeItemListStart
+    \resumeItem{Android app for real-time help in emergencies, with \textbf{family management} and \textbf{live location tracking} via Firebase Realtime Database.}
+    \resumeItem{\textbf{Crash detection} from \textbf{accelerometer} data with automatic notifications.}
+    \resumeItem{\textbf{Emergency alerts} triggered by pressing the power button four times.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications \& Workshops}
+\begin{itemize}[leftmargin=0.14in, label=\textbullet, nosep, itemsep=1pt]
+  \item \link{https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA}{\textbf{Postman API Fundamentals Student Expert}}
+  \item \link{https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing}{\textbf{Accenture Nordics Developer}}
+  \item \link{https://drive.google.com/file/d/1LMBDrknzpRZ0OnbYsTMo8oOisqoqEKzi/view?usp=sharing}{Java} $|$
+        \link{https://drive.google.com/file/d/1jF3zN1Ecp5yUa-SXFu_uIQ0HhCrE6xOG/view?usp=sharing}{MySQL} $|$
+        \link{https://drive.google.com/file/d/1X3HARMh4VaWnRau8UqEa5lfnjTw9ZLat/view}{Git and GitHub Workshop}
+\end{itemize}
+
+\end{multicols}
+
+\end{document}

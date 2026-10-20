@@ -1,6 +1,7 @@
  import React, { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X, Download, Eye } from 'lucide-react';
 import { type NavLink } from '../types';
+import resumePdf from '../assets/resume.pdf';
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -43,14 +44,25 @@ const Navigation: React.FC = () => {
             ))}
           </div>
 
-          <a 
-            href="/resume.pdf"
-            download="Shubham_Raut_Resume.pdf"
-            className="hidden md:flex px-6 py-2 rounded-full border border-white/20 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all text-sm font-medium items-center gap-2 group"
-          >
-            Resume
-            <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-          </a>
+          <div className="hidden md:flex items-center gap-2">
+            <a 
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2 rounded-full border border-white/20 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all text-sm font-medium flex items-center gap-2"
+            >
+              Resume
+              <Eye className="w-4 h-4" />
+            </a>
+            <a 
+              href={resumePdf}
+              download="Shubham_Raut_Resume.pdf"
+              aria-label="Download resume"
+              className="p-2 rounded-full border border-white/20 hover:border-cyan-400 hover:bg-cyan-400/10 transition-all group"
+            >
+              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+          </div>
 
           <button 
             className="md:hidden"
@@ -73,6 +85,14 @@ const Navigation: React.FC = () => {
                 {link.name}
               </a>
             ))}
+            <div className="flex gap-4 pt-2">
+              <a href={resumePdf} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Eye className="w-4 h-4" /> View Resume
+              </a>
+              <a href={resumePdf} download="Shubham_Raut_Resume.pdf" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Download className="w-4 h-4" /> Download
+              </a>
+            </div>
           </div>
         )}
       </div>
