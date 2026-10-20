@@ -1,5 +1,5 @@
 // App.tsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,15 +10,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
-  useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
-  }, []);
-
   return (
-    <div className="antialiased selection:bg-cyan-400 selection:text-black bg-[#0a0a0a] text-white overflow-x-hidden">
-      <div 
-        className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]"
-      />
+    <div className="selection:bg-cyan-400 selection:text-black bg-ink text-white overflow-x-clip">
       <Navigation />
       <main>
         <Hero />

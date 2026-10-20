@@ -1,42 +1,34 @@
- import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 
 interface ScrollRevealOptions {
   threshold?: number;
   rootMargin?: string;
 }
 
-export const useScrollReveal = (
-  options: ScrollRevealOptions = {}
-): [RefObject<HTMLDivElement>, boolean] => {
-  const ref = useRef<HTMLDivElement>(null) as RefObject<HTMLDivElement>;
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+export const useScrollReveal = <T extends HTMLElement = HTMLDivElement>(
+  { threshold = 0.12, rootMargin = '0px 0px -8% 0px' }: ScrollRevealOptions = {}
+): [RefObject<T>, boolean] => {
+  const ref = useRef<T>(null) as RefObject<T>;
+  // No IntersectionObserver (old browsers, some crawlers): show content immediately.
+  const [isVisible, setIsVisible] = useState<boolean>(() => typeof IntersectionObserver === 'undefined');
 
   useEffect(() => {
+    const node = ref.current;
+    if (!node || isVisible) return;
+
     const observer = new IntersectionObserver(
       ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
-        ...options
-      }
+      { threshold, rootMargin }
     );
 
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [options]);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold, rootMargin, isVisible]);
 
   return [ref, isVisible];
 };

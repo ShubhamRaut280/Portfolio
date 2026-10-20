@@ -1,9 +1,12 @@
- import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import { ChevronRight } from 'lucide-react';
+import React from 'react';
+import { ChevronRight, MapPin } from 'lucide-react';
 import { type Experience as ExperienceType } from '../types';
+import Reveal from './ui/Reveal';
+import SectionHeader from './ui/SectionHeader';
 
-interface ExperienceCardProps extends ExperienceType { }
+interface ExperienceCardProps extends ExperienceType {
+  delay?: number;
+}
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({
   title,
@@ -12,43 +15,70 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   location,
   points,
   tags,
-  color
+  color,
+  delay = 0,
 }) => {
-  const [ref, isVisible] = useScrollReveal();
+  const isCurrent = period.includes('Present');
 
   return (
-    <div
-      ref={ref}
-      className={`h-full backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl p-8 relative overflow-hidden group hover:border-cyan-400/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,217,255,0.2)] transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-    >
-      <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl transition-all ${color}`} />
-      <div className="relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-          <div>
-            <h4 className="text-2xl font-bold mb-1">{title}</h4>
-            <p className="text-cyan-400 font-medium">{company}, {location}</p>
-          </div>
-          <span className="px-4 py-1 rounded-full text-sm bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 mt-2 md:mt-0">
-            {period}
-          </span>
-        </div>
-        <ul className="space-y-2 text-gray-400 mb-6">
-          {points.map((point: string, idx: number) => (
-            <li key={idx} className="flex items-start gap-2">
-              <ChevronRight className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag: string, idx: number) => (
-            <span key={idx} className="px-3 py-1 rounded-full text-xs backdrop-blur-md bg-white/5 border border-white/10">
-              {tag}
+    <Reveal as="li" delay={delay} className="relative">
+      {/* Timeline dot, centred on the vertical line */}
+      <span
+        className="absolute -left-5 top-7 flex h-3.5 w-3.5 -translate-x-1/2 items-center justify-center md:-left-[30px] md:top-10 md:h-4 md:w-4"
+        aria-hidden="true"
+      >
+        {isCurrent && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400/60" />}
+        <span
+          className={`relative inline-flex h-full w-full rounded-full border-2 border-ink-raised ${
+            isCurrent
+              ? 'bg-cyan-400 shadow-[0_0_12px_3px_rgba(34,211,238,0.6)]'
+              : 'bg-purple-500 shadow-[0_0_10px_2px_rgba(168,85,247,0.45)]'
+          }`}
+        />
+      </span>
+
+      <article className="glass-card glass-card-hover group relative overflow-hidden p-5 md:p-8">
+        <div
+          className={`pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full blur-3xl transition-colors duration-500 ${color}`}
+          aria-hidden="true"
+        />
+        <div className="relative">
+          <header className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-6">
+            <div className="min-w-0">
+              <h3 className="text-xl font-bold leading-snug md:text-2xl">{title}</h3>
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm font-medium text-cyan-400 md:text-base">
+                <span>{company},</span>
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
+                  {location}
+                </span>
+              </p>
+            </div>
+            <span className="inline-flex w-fit flex-shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-400 md:px-4 md:text-sm">
+              {isCurrent && <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" aria-hidden="true" />}
+              {period}
             </span>
-          ))}
+          </header>
+
+          <ul className="mb-6 space-y-2.5 text-sm leading-relaxed text-gray-400 md:text-base">
+            {points.map((point: string, idx: number) => (
+              <li key={idx} className="flex items-start gap-2">
+                <ChevronRight className="mt-[3px] h-4 w-4 flex-shrink-0 text-cyan-400 md:mt-1" aria-hidden="true" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="flex flex-wrap gap-2" aria-label={`Technologies used at ${company}`}>
+            {tags.map((tag: string) => (
+              <li key={tag} className="chip">
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-    </div>
+      </article>
+    </Reveal>
   );
 };
 
@@ -88,19 +118,20 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section id="experience" className="py-32 relative bg-[#111111]">
-      <div className="max-w-screen mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">Work Experience</h2>
-          <h3 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk']">Professional Journey</h3>
-        </div>
+    <section id="experience" className="section bg-ink-raised">
+      <div className="container-page">
+        <SectionHeader eyebrow="Work Experience" title="Professional Journey" />
 
-        <div className="max-w-screen mx-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <ol className="relative mx-auto max-w-4xl space-y-8 pl-8 md:space-y-10 md:pl-12">
+          {/* Vertical timeline line */}
+          <span
+            className="pointer-events-none absolute bottom-0 left-3 top-2 w-px -translate-x-1/2 bg-gradient-to-b from-cyan-400 via-purple-500 to-transparent md:left-[18px]"
+            aria-hidden="true"
+          />
           {experiences.map((exp: ExperienceType, idx: number) => (
-            <ExperienceCard key={idx} {...exp} />
+            <ExperienceCard key={`${exp.company}-${exp.title}`} {...exp} delay={idx * 100} />
           ))}
-        </div>
-
+        </ol>
       </div>
     </section>
   );

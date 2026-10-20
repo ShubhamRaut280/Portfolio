@@ -1,72 +1,61 @@
- import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React from 'react';
 import { Mail, MapPin } from 'lucide-react';
-import type { ContactInfo } from '../types';
 import Socials from './Socials';
+import Reveal from './ui/Reveal';
+import SectionHeader from './ui/SectionHeader';
 
-interface ContactLinkProps extends ContactInfo { }
-
-const ContactLink: React.FC<ContactLinkProps> = ({ href, icon: Icon, label, value, color }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-4 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors group"
-  >
-    <div className={`w-14 h-14 rounded-full ${color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-      <Icon className={`w-6 h-6 ${color.replace('bg-', 'text-').replace('/10', '')} inherit`} />
-    </div>
-    <div>
-      <div className="text-sm text-gray-500 mb-1">{label}</div>
-      <div className="font-medium">{value}</div>
-    </div>
-  </a>
-);
+const EMAIL = 'rautshubham280@gmail.com';
 
 const Contact: React.FC = () => {
-  const [ref, isVisible] = useScrollReveal();
-
-  const contacts: ContactInfo[] = [
-    {
-      href: "mailto:rautshubham280@gmail.com",
-      icon: Mail,
-      label: "Email",
-      value: "rautshubham280@gmail.com",
-      color: "bg-cyan-400/10"
-    }
-  ];
-
   return (
-    <section id="contact" className="py-32 relative">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">Get In Touch</h2>
-          <h3 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk'] mb-6">Let's work together</h3>
-          <p className="text-gray-400">Available for freelance projects and full-stack opportunities.</p>
-        </div>
+    <section id="contact" className="section">
+      <div className="container-page">
+        <div className="mx-auto max-w-4xl">
+          <SectionHeader
+            eyebrow="Get In Touch"
+            title="Let's work together"
+            subtitle="Available for freelance projects and full-stack opportunities."
+          />
 
-        <div
-          ref={ref}
-          className={`backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08] rounded-3xl p-8 md:p-12 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <div className="flex mb-5 items-center justify-center">
-            <ContactLink key={0} {...contacts[0]} />
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-8">
-            <Socials />
-          </div>
+          <Reveal delay={100} className="relative isolate">
+            {/* Soft gradient glow */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute -top-10 left-1/4 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl sm:h-64 sm:w-64" />
+              <div className="absolute -bottom-10 right-1/4 h-48 w-48 rounded-full bg-purple-500/20 blur-3xl sm:h-64 sm:w-64" />
+            </div>
 
+            <div className="glass-card rounded-3xl p-5 sm:p-8 md:p-12">
+              {/* Email */}
+              <div className="mb-5 flex justify-center">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="group flex w-full max-w-md items-center gap-3 rounded-2xl bg-white/5 p-4 transition-colors hover:bg-white/10 sm:w-auto sm:gap-4 sm:p-6"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 sm:h-14 sm:w-14 text-cyan-400 transition-transform group-hover:scale-110">
+                    <Mail className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 text-left">
+                    <span className="mb-1 block text-sm text-gray-500">Email</span>
+                    <span className="block break-words text-[13px] font-medium min-[400px]:text-base">{EMAIL}</span>
+                  </span>
+                </a>
+              </div>
 
+              {/* Socials */}
+              <Reveal delay={200} className="mb-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+                <Socials variant="pill" />
+              </Reveal>
 
-
-
-          <div className="text-center pt-8 border-t border-white/10">
-            <p className="text-gray-500 mb-2">Location</p>
-            <p className="text-lg font-medium flex items-center justify-center gap-2">
-              <MapPin className="w-5 h-5 text-green-400" />
-              Pune, India
-            </p>
-          </div>
+              {/* Location */}
+              <Reveal delay={300} className="border-t border-white/10 pt-8 text-center">
+                <p className="mb-2 text-gray-500">Location</p>
+                <p className="flex items-center justify-center gap-2 text-lg font-medium">
+                  <MapPin className="h-5 w-5 text-green-400" aria-hidden="true" />
+                  Pune, India
+                </p>
+              </Reveal>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

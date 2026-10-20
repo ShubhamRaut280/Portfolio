@@ -1,57 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-ink-raised: #111111;
+
+  --animate-gradient-x: gradient-x 6s ease infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -18px, 0); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translate3d(0, 16px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the fixed nav */
+    scroll-padding-top: 6rem;
   }
-  
+
   body {
-    @apply bg-[#0a0a0a] text-white;
-    font-family: 'Inter', sans-serif;
+    @apply bg-ink text-white font-sans antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    @apply font-display;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-cyan-400 rounded-md;
   }
 }
 
 @layer components {
+  /* Vertical rhythm shared by every page section */
+  .section {
+    @apply relative py-20 md:py-28;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
   .glass {
-    @apply backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08];
+    @apply backdrop-blur-xl bg-ink-raised/70 border border-white/[0.08];
   }
-  
+
   .glass-card {
-    @apply backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 transition-all duration-300;
+    @apply rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-xl transition-[border-color,transform,box-shadow] duration-300;
   }
-  
-  .glass-card:hover {
+
+  .glass-card-hover:hover {
     @apply border-cyan-400/30 -translate-y-1;
-    box-shadow: 0 20px 40px -15px rgba(0, 217, 255, 0.2);
+    box-shadow: 0 20px 40px -18px rgba(0, 217, 255, 0.25);
   }
-  
-  .font-display {
-    font-family: 'Space Grotesk', sans-serif;
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-gray-300;
+  }
+
+  /* Scroll reveal: elements start hidden and fade up once visible (see Reveal.tsx) */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-[length:200%_200%];
-    animation: gradient-x 5s ease infinite;
+    @apply bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x;
   }
 }
 
-@keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

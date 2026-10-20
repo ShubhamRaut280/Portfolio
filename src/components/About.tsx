@@ -1,7 +1,7 @@
 import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Trophy, Star, IdCard } from 'lucide-react';
+import { Trophy, Star, IdCard, ExternalLink } from 'lucide-react';
 import { type LucideIcon } from 'lucide-react';
+import Reveal from './ui/Reveal';
 
 interface AwardCardProps {
   icon: LucideIcon;
@@ -10,121 +10,142 @@ interface AwardCardProps {
   year: string;
   link?: string;
   description: string;
-} 
+}
+
 const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, company, year, link, description }) => (
-  <div className="backdrop-blur-xl bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 border border-yellow-500/20 rounded-2xl p-6">
+  <article className="group rounded-2xl border border-yellow-500/20 bg-gradient-to-br from-yellow-500/10 to-yellow-500/[0.03] p-5 backdrop-blur-xl transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-yellow-400/40 hover:shadow-[0_20px_40px_-18px_rgba(250,204,21,0.25)] sm:p-6">
     <div className="flex items-start gap-4">
-      <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
-        <Icon className="w-6 h-6 text-yellow-400" />
+      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-yellow-500/20 ring-1 ring-yellow-400/20 sm:h-12 sm:w-12">
+        <Icon className="h-5 w-5 text-yellow-400 sm:h-6 sm:w-6" aria-hidden="true" />
       </div>
-      <div>
-        <h4 className="font-bold text-lg mb-1">{title}</h4>
-        <p className="text-sm text-gray-400">{company} • {year}</p>
-        {link && (
-          <a href={link} className="text-sm text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">
-            More Info
-          </a>
-        )}
-        <p className="text-sm text-gray-300 mt-2">{description}</p>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
+          <h3 className="text-base font-bold sm:text-lg">{title}</h3>
+          {link && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`More info about ${title} (opens in a new tab)`}
+              className="inline-flex items-center gap-1 text-xs font-medium text-yellow-400 transition-colors hover:text-yellow-300 hover:underline underline-offset-4"
+            >
+              More Info
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          )}
+        </div>
+        <p className="mt-0.5 text-sm text-gray-400">
+          {company} <span aria-hidden="true">•</span> {year}
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-gray-300">{description}</p>
       </div>
+    </div>
+  </article>
+);
+
+interface StatTileProps {
+  value: string;
+  label: string;
+  detail?: string;
+  valueClassName: string;
+}
+
+const StatTile: React.FC<StatTileProps> = ({ value, label, detail, valueClassName }) => (
+  <div className="glass-card glass-card-hover flex h-full items-center gap-4 p-4 sm:flex-col sm:items-center sm:justify-start sm:gap-1 sm:text-center">
+    <div className={`w-24 flex-shrink-0 font-display text-2xl font-bold sm:w-auto md:text-3xl lg:text-2xl xl:text-3xl ${valueClassName}`}>
+      {value}
+    </div>
+    <div className="min-w-0">
+      <div className="text-sm text-gray-400">{label}</div>
+      {detail && <div className="mt-0.5 text-xs leading-snug text-gray-500 text-balance">{detail}</div>}
     </div>
   </div>
 );
 
+const certifications = [
+  { name: 'Claude Certified Architect – Foundations', link: 'https://www.credly.com/badges/708fc779-3ff4-47cb-90e1-b9b67bb68fb2/public_url' },
+  { name: 'Accenture Nordics Developer Program', link: 'https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing' },
+  { name: 'Postman API Fundamentals Student Expert', link: 'https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA' },
+  { name: 'Java', link: 'https://drive.google.com/file/d/1LMBDrknzpRZ0OnbYsTMo8oOisqoqEKzi/view?usp=sharing' },
+  { name: 'MySQL', link: 'https://drive.google.com/file/d/1jF3zN1Ecp5yUa-SXFu_uIQ0HhCrE6xOG/view?usp=sharing' },
+];
+
 const About: React.FC = () => {
-  const [ref1, isVisible1] = useScrollReveal();
-  const [ref2, isVisible2] = useScrollReveal();
-
-
-
   return (
-    <section id="about" className="py-32 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div
-            ref={ref1}
-            className={`transition-all duration-800 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">About Me</h2>
-            <h3 className="text-4xl md:text-5xl font-bold mb-6 leading-tight font-['Space_Grotesk']">
-              Building scalable solutions for <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent">real-world</span> problems
-            </h3>
-            <div className="space-y-4 text-gray-400 leading-relaxed">
+    <section id="about" className="section">
+      <div className="container-page">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">About Me</p>
+            <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+              Building scalable solutions for <span className="text-gradient">real-world</span> problems
+            </h2>
+            <div className="space-y-4 text-base leading-relaxed text-gray-400">
               <p>
                 Software Development Engineer with hands-on experience building scalable, production-grade web and mobile applications.
-                Strong background in designing microservices, real-time systems, and event-driven architectures using Redis, BullMQ, Celery, and WebSockets, and in building AI agent platforms with LLMs and MCP.              </p>              <p>
+                Strong background in designing microservices, real-time systems, and event-driven architectures using Redis, BullMQ, Celery, and WebSockets, and in building AI agent platforms with LLMs and MCP.
+              </p>
+              <p>
                 Experienced in deploying and operating cloud-native applications on AWS (ECS Fargate, S3, CloudFront, ALB) and GCP Cloud Run with containerized Docker workflows.
                 Comfortable working across the full stack, owning features end-to-end from API design to frontend delivery and CI/CD automation.
-                Driven by a passion for solving real-world problems, writing maintainable code, and continuously learning modern engineering practices.              </p>
+                Driven by a passion for solving real-world problems, writing maintainable code, and continuously learning modern engineering practices.
+              </p>
             </div>
 
-            <div className="flex gap-4 mt-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400">B.E.</div>
-                <div className="text-sm text-gray-500">Computer Science</div>
-                <div className="text-xs text-gray-600">Sinhgad College</div>
-              </div>
-              <div className="w-px bg-white/10" />
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-500">Diploma</div>
-                <div className="text-sm text-gray-500">Engineering</div>
-                <div className="text-xs text-gray-600">Government Polytechnic Khamgaon</div>
-              </div>
-              <div className="w-px bg-white/10" />
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-400">2+</div>
-                <div className="text-sm text-gray-500">Years Exp.</div>
-              </div>
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <StatTile value="B.E." label="Computer Science" detail="Sinhgad College" valueClassName="text-cyan-400" />
+              <StatTile value="Diploma" label="Engineering" detail="Government Polytechnic Khamgaon" valueClassName="text-purple-500" />
+              <StatTile value="2+" label="Years Exp." valueClassName="text-green-400" />
             </div>
-          </div>
+          </Reveal>
 
-          <div
-            ref={ref2}
-            className={`space-y-6 transition-all duration-800 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            <AwardCard
-              icon={Trophy}
-              title="Customer Champion Award"
-              company="Onelab Ventures"
-              link='https://drive.google.com/file/d/1QUKRPD6DVNWDiajRwz1g_zjMEvZgqAC4/view?usp=sharing'
-              year="2025"
-              description="Recognized for strong client-first mindset and consistently exceeding customer expectations."
-            />
+          <div className="space-y-5 sm:space-y-6">
+            <Reveal delay={100}>
+              <AwardCard
+                icon={Trophy}
+                title="Customer Champion Award"
+                company="Onelab Ventures"
+                link="https://drive.google.com/file/d/1QUKRPD6DVNWDiajRwz1g_zjMEvZgqAC4/view?usp=sharing"
+                year="2025"
+                description="Recognized for strong client-first mindset and consistently exceeding customer expectations."
+              />
+            </Reveal>
 
-            <AwardCard
-              icon={Star}
-              title="Rising Star Award"
-              company="Onelab Ventures"
-              link='https://drive.google.com/file/d/1ZSSrJumJK9RBAA-hVlTycSIHmg_7dsKS/view?usp=sharing'
-              year="2025"
-              description="Awarded for rapid growth, initiative, and impactful early-stage contributions."
-            />
+            <Reveal delay={200}>
+              <AwardCard
+                icon={Star}
+                title="Rising Star Award"
+                company="Onelab Ventures"
+                link="https://drive.google.com/file/d/1ZSSrJumJK9RBAA-hVlTycSIHmg_7dsKS/view?usp=sharing"
+                year="2025"
+                description="Awarded for rapid growth, initiative, and impactful early-stage contributions."
+              />
+            </Reveal>
 
-            <div className="backdrop-blur-xl bg-[#111111]/70 border border-white/10 rounded-2xl p-6">
-              <h4 className="font-semibold mb-4 flex items-center gap-2">
-                <IdCard className="w-5 h-5 text-cyan-400" />
-                Certifications
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { name: 'Claude Certified Architect – Foundations', link: 'https://www.credly.com/badges/708fc779-3ff4-47cb-90e1-b9b67bb68fb2/public_url' },
-                  { name: 'Accenture Nordics Developer Program', link: 'https://drive.google.com/file/d/1KzjUFKgFwRoj2dWXHj9HKbljyRhAMUpI/view?usp=sharing' },
-                  { name: 'Postman API Fundamentals Student Expert', link: 'https://api.badgr.io/public/assertions/1fMtBEytRayXMeposAemSA' },
-                  { name: 'Java', link: 'https://drive.google.com/file/d/1LMBDrknzpRZ0OnbYsTMo8oOisqoqEKzi/view?usp=sharing' },
-                  { name: 'MySQL', link: 'https://drive.google.com/file/d/1jF3zN1Ecp5yUa-SXFu_uIQ0HhCrE6xOG/view?usp=sharing' },
-                ].map((cert) => (
-                  <a
-                    key={cert.name}
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all"
-                  >
-                    {cert.name}
-                  </a>
-                ))}
+            <Reveal delay={300}>
+              <div className="glass-card glass-card-hover p-5 sm:p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-base font-semibold">
+                  <IdCard className="h-5 w-5 text-cyan-400" aria-hidden="true" />
+                  Certifications
+                </h3>
+                <ul className="flex flex-wrap gap-2">
+                  {certifications.map((cert) => (
+                    <li key={cert.name} className="max-w-full">
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${cert.name} certificate (opens in a new tab)`}
+                        className="chip max-w-full gap-1.5 transition-colors duration-200 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-white"
+                      >
+                        <span className="break-words">{cert.name}</span>
+                        <ExternalLink className="h-3 w-3 flex-shrink-0 opacity-60" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>

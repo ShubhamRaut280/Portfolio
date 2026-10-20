@@ -1,11 +1,12 @@
 import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Github, Server, MessageSquare, Zap, Users, Globe, AlertTriangle, Brush, FlaskConical } from 'lucide-react';
 import type { Project, ProjectLink } from '../types';
- import { FaDocker } from 'react-icons/fa';
+import { FaDocker } from 'react-icons/fa';
 import { SiSwagger } from 'react-icons/si';
- 
-interface ProjectCardProps extends Project { }
+import Reveal from './ui/Reveal';
+import SectionHeader from './ui/SectionHeader';
+
+type ProjectCardProps = Project;
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -17,59 +18,77 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   gradient,
   tags
 }) => {
-  const [ref, isVisible] = useScrollReveal();
-
   return (
-    <div
-      ref={ref}
-      className={`backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-2xl overflow-hidden group hover:border-cyan-400/30 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-    >
-      <div className={`h-48 relative overflow-hidden ${gradient}`}>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Icon className="w-16 h-16 text-white/20 group-hover:scale-110 transition-transform duration-500" />
-        </div>
-        <div className="absolute top-4 right-4 flex gap-2">
-          {tags.map((tag: string, idx: number) => (
-            <span key={idx} className="px-3 py-1 rounded-full text-xs backdrop-blur-md bg-black/20 border border-white/10">
-              {tag}
-            </span>
-          ))}
+    <article className="glass-card glass-card-hover group flex h-full flex-col overflow-hidden">
+      {/* Compact header: project gradient + icon + tags */}
+      <div className="relative h-28 overflow-hidden sm:h-32">
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110 ${gradient}`}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_120%,rgba(255,255,255,0.12),transparent_60%)]"
+        />
+        <div className="relative flex h-full items-end justify-between gap-3 p-4 sm:p-5">
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 shadow-lg backdrop-blur-md transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+            <Icon className="h-6 w-6 text-white" />
+          </div>
+          <div className="flex max-w-[75%] flex-wrap content-end justify-end gap-1.5">
+            {tags.map((tag: string) => (
+              <span
+                key={tag}
+                className="chip border-white/15 bg-black/30 px-2.5 py-0.5 text-[11px] text-gray-100 backdrop-blur-md"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="p-6">
-        <h4 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">{title}</h4>
-        <p className="text-gray-400 text-sm mb-4">{description}</p>
-        <ul className="text-xs text-gray-500 space-y-1 mb-4">
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <h3 className="mb-2 font-display text-lg font-bold leading-snug transition-colors group-hover:text-cyan-400 md:text-xl">
+          {title}
+        </h3>
+        <p className="mb-4 text-sm leading-relaxed text-gray-400">{description}</p>
+        <ul className="mb-5 space-y-1.5 text-sm text-gray-400">
           {points.map((point: string, idx: number) => (
-            <li key={idx}>• {point}</li>
+            <li key={idx} className="flex gap-2.5 leading-relaxed">
+              <span aria-hidden="true" className="mt-[0.55rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/80" />
+              <span>{point}</span>
+            </li>
           ))}
         </ul>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tech.map((t: string, idx: number) => (
-            <span key={idx} className="text-xs text-gray-400">{t}</span>
+        <ul className="mb-5 flex flex-wrap gap-1.5" aria-label="Tech stack">
+          {tech.map((t: string) => (
+            <li key={t} className="chip">{t}</li>
           ))}
-        </div>
+        </ul>
+
         {links.length > 0 && (
-          <div className="flex items-center justify-between pt-4 border-t border-white/5">
-            <div className="flex gap-3">
+          <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/5 pt-4">
+            <div className="-ml-2 flex gap-1">
               {links.map((link: ProjectLink, idx: number) => (
                 <a
                   key={idx}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-white transition-colors"
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-cyan-400 focus-visible:text-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                   title={link.label}
+                  aria-label={`${title} – ${link.label}`}
                 >
-                  <link.icon className="w-5 h-5" />
+                  <link.icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
-            <span className="text-xs text-gray-600">{links[0].type}</span>
+            <span className="text-xs text-gray-500">{links[0].type}</span>
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 
@@ -236,17 +255,28 @@ const Projects: React.FC = () => {
 
   ];
 
-  return (
-    <section id="projects" className="py-32 relative bg-[#111111]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-sm font-semibold text-cyan-400 mb-4 tracking-widest uppercase">Portfolio</h2>
-          <h3 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk']">Featured Projects</h3>
-        </div>
+  // Grouped by card length so each grid row holds similar-height cards (fewer empty gaps)
+  const displayOrder = [
+    "AI-Powered Retrosynthesis Platform", "Collaborative Canvas App", "RAG PDF Bot",
+    "LiveThread", "SkillSphere", "Alertmate Application",
+    "ElectroRoute",
+  ];
+  const rank = (title: string) => {
+    const i = displayOrder.indexOf(title);
+    return i === -1 ? displayOrder.length : i;
+  };
+  const orderedProjects = [...projects].sort((a, b) => rank(a.title) - rank(b.title));
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project: Project, idx: number) => (
-            <ProjectCard key={idx} {...project} />
+  return (
+    <section id="projects" className="section bg-ink-raised">
+      <div className="container-page">
+        <SectionHeader eyebrow="Portfolio" title="Featured Projects" />
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {orderedProjects.map((project: Project, idx: number) => (
+            <Reveal key={project.title} delay={Math.min(idx * 90, 500)} className="h-full">
+              <ProjectCard {...project} />
+            </Reveal>
           ))}
         </div>
       </div>

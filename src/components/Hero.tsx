@@ -1,8 +1,8 @@
 // components/Hero.tsx
 import React from 'react';
-import { ArrowDown, Globe, Smartphone, Cloud, Database } from 'lucide-react';
+import { ArrowDown, ChevronDown, Globe, Smartphone, Cloud, Database } from 'lucide-react';
 import CanvasBackground from './CanvasBackground';
- import Socials from './Socials';
+import Socials from './Socials';
 
 interface HeroCard {
   icon: React.ComponentType<{ className?: string }>;
@@ -11,82 +11,124 @@ interface HeroCard {
   color: string;
 }
 
-const Hero: React.FC = () => {
-   
-  const cards: HeroCard[] = [
-    { icon: Globe, label: 'Web', value: 'React/Node', color: 'text-cyan-400' },
-    { icon: Smartphone, label: 'Mobile', value: 'Kotlin/Flutter/React Native', color: 'text-green-400' },
-    { icon: Cloud, label: 'Cloud', value: 'AWS', color: 'text-orange-400' },
-    { icon: Database, label: 'Backend', value: 'Java/Node.js/Python', color: 'text-purple-400' },
-  ];
+const cards: HeroCard[] = [
+  { icon: Globe, label: 'Web', value: 'React/Node', color: 'text-cyan-400' },
+  { icon: Smartphone, label: 'Mobile', value: 'Kotlin/Flutter/React Native', color: 'text-green-400' },
+  { icon: Cloud, label: 'Cloud', value: 'AWS', color: 'text-orange-400' },
+  { icon: Database, label: 'Backend', value: 'Java/Node.js/Python', color: 'text-purple-400' },
+];
 
+/** Stagger helper for the on-load entrance animation. */
+const delay = (ms: number): React.CSSProperties => ({ animationDelay: `${ms}ms` });
+
+const Str: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-green-400">'{children}'</span>
+);
+
+const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-       
+    <section
+      id="home"
+      className="relative flex items-center overflow-hidden pt-28 pb-16 sm:pb-24 md:min-h-[100svh] lg:pt-32"
+    >
       <CanvasBackground />
 
-      <div className="relative z-10 max-w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-xl bg-[#111111]/70 border border-cyan-400/20 text-xs font-medium text-cyan-400">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+      <div className="container-page relative z-10 grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        {/* Intro */}
+        <div className="min-w-0">
+          <div
+            className="glass inline-flex animate-fade-up items-center gap-2 rounded-full border-cyan-400/20 px-4 py-2 text-xs font-medium text-cyan-400"
+            style={delay(0)}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
+            </span>
             SDE I at Onelab Ventures
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight font-['Space_Grotesk']">
-            Shubham<br />
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 bg-clip-text text-transparent bg-[length:200%_200%]">
-              Raut
-            </span>
+          <h1
+            className="mt-6 animate-fade-up font-display text-5xl font-bold leading-none tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl"
+            style={delay(100)}
+          >
+            Shubham
+            <br />
+            <span className="text-gradient">Raut</span>
           </h1>
 
-          <p className="mt-2 text-gray-500 text-2xl md:text-3xl lg:text-4xl font-['Space_Grotesk']">
-            Full Stack Web & Mobile Dev
+          <p
+            className="mt-4 animate-fade-up font-display text-2xl text-gray-400 sm:text-3xl lg:text-4xl"
+            style={delay(200)}
+          >
+            Full Stack Web &amp; Mobile Dev
           </p>
 
-          <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-            Results-driven Software Development Engineer experienced in shipping production-grade features in fast-paced environments. Strong background in full-stack development, cloud infrastructure, real-time systems, and AI agent platforms.          </p>
+          <p
+            className="mt-6 max-w-xl animate-fade-up text-base leading-relaxed text-gray-400 sm:text-lg"
+            style={delay(300)}
+          >
+            Results-driven Software Development Engineer experienced in shipping production-grade features in
+            fast-paced environments. Strong background in full-stack development, cloud infrastructure, real-time
+            systems, and AI agent platforms.
+          </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="mt-8 flex animate-fade-up flex-wrap items-center gap-4" style={delay(400)}>
             <a
               href="#projects"
-              className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-cyan-400 hover:scale-105 transition-all flex items-center gap-2"
+              className="group inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-black shadow-[0_10px_30px_-12px_rgba(255,255,255,0.35)] transition-[background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-cyan-400 hover:shadow-[0_14px_36px_-12px_rgba(0,217,255,0.6)]"
             >
               View Projects
-              <ArrowDown className="w-4 h-4" />
+              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
-           <Socials/>
+            <div className="flex items-center gap-3">
+              <Socials />
+            </div>
           </div>
- 
         </div>
 
-        <div className="space-y-8 relative hidden md:block">
-          <div className="relative w-full  max-w-md mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 via-purple-500/20 to-green-400/20 rounded-full blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
-            <div className="relative backdrop-blur-xl bg-[#111111]/70 border border-white/[0.08] rounded-3xl p-8 h-full flex flex-col justify-between overflow-hidden group">
- 
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <div className="font-mono text-sm text-gray-300 space-y-1">
-                  <p><span className="text-purple-500">const</span> <span className="text-cyan-400">developer</span> = {'{'}</p>
-                  <p className="pl-4">name: <span className="text-green-400">'Shubham Raut'</span>,</p>
-                  <p className="pl-4">role: <span className="text-green-400">'SDE I'</span>,</p>
-                  <p className="pl-4">location: <span className="text-green-400">'Pune, India'</span>,</p>
-                  <p className="pl-4">stack: [<span className="text-green-400">'Java'</span>, <span className='text-green-400'>'Python'</span>, <span className="text-green-400">'Node'</span>, <span className="text-green-400">'React'</span> ],</p>
-                  <p className="pl-4">awards: [<span className="text-green-400">'Customer Champion'</span>, <span className="text-green-400">'Rising Star'</span>]</p>
-                  <p>{'}'};</p>
-                </div>
+        {/* Code card: hidden on small phones where the code lines can't fit */}
+        <div className="relative hidden w-full animate-fade-up sm:block" style={delay(550)}>
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-cyan-400/20 via-purple-500/20 to-green-400/20 blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
+            <div className="glass relative overflow-hidden rounded-3xl p-6 lg:p-8">
+              <div className="flex items-center gap-2" aria-hidden="true">
+                <span className="h-3 w-3 rounded-full bg-red-500/90" />
+                <span className="h-3 w-3 rounded-full bg-yellow-500/90" />
+                <span className="h-3 w-3 rounded-full bg-green-500/90" />
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                {cards.map((item: HeroCard, idx: number) => (
-                  <div key={idx} className="backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/[0.01] border border-white/5 rounded-xl p-4 text-center hover:border-cyan-400/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,217,255,0.2)] transition-all">
-                    <item.icon className={`w-6 h-6 mx-auto mb-2 ${item.color}`} />
-                    <div className="text-xs text-gray-400">{item.label}</div>
-                    {/* <div className="font-bold text-sm">{item.value}</div> */}
+              <div className="mt-5 space-y-1 font-mono text-[13px] leading-relaxed text-gray-300 lg:text-sm">
+                <p>
+                  <span className="text-purple-500">const</span> <span className="text-cyan-400">developer</span> ={' '}
+                  {'{'}
+                </p>
+                <p className="pl-4">
+                  name: <Str>Shubham Raut</Str>,
+                </p>
+                <p className="pl-4">
+                  role: <Str>SDE I</Str>,
+                </p>
+                <p className="pl-4">
+                  location: <Str>Pune, India</Str>,
+                </p>
+                <p className="pl-4">
+                  stack: [<Str>Java</Str>, <Str>Python</Str>, <Str>Node</Str>, <Str>React</Str>],
+                </p>
+                <p className="pl-4">
+                  awards: [<Str>Customer Champion</Str>, <Str>Rising Star</Str>]
+                </p>
+                <p>{'};'}</p>
+              </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4">
+                {cards.map((item) => (
+                  <div
+                    key={item.label}
+                    title={item.value}
+                    className="glass-card glass-card-hover flex flex-col items-center rounded-xl p-4 text-center"
+                  >
+                    <item.icon className={`h-6 w-6 ${item.color}`} />
+                    <span className="mt-2 text-xs font-medium tracking-wide text-gray-300">{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -95,9 +137,15 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <ArrowDown className="w-6 h-6 text-gray-500" />
-      </div>
+      {/* Scroll indicator: only on wider, taller viewports where it can't overlap content */}
+      <a
+        href="#about"
+        aria-label="Scroll to About section"
+        className="absolute inset-x-0 bottom-6 mx-auto hidden w-max flex-col items-center gap-1 text-gray-500 transition-colors hover:text-cyan-400 [@media(min-width:768px)_and_(min-height:760px)]:flex"
+      >
+        <span className="text-[11px] font-medium uppercase tracking-[0.2em]">Scroll</span>
+        <ChevronDown className="h-5 w-5 animate-bounce" />
+      </a>
     </section>
   );
 };
